@@ -1,8 +1,10 @@
 public class Column{
     private char col [];
+    private int highest;
 
     public Column(){
-        this.col = new char[] {  '_',
+        this.col = new char[] { 
+                        '_',
                         '_',
                         '_',
                         '_',
@@ -15,10 +17,15 @@ public class Column{
         return col.length;
     }
 
+    public int getHighest(){
+        return highest;
+    }
+
     public boolean addToken(char player){
         for(int i = col.length-1; i >= 0; i--){
             if(col[i] == '_'){
                 col[i] = player;
+                highest = i;
                 return true;
             }
         }
@@ -27,6 +34,10 @@ public class Column{
 
     public char getToken(int pos){
         return col[pos];
+    }
+
+    public void capitalizeToken(int pos){
+        col[pos] = Character.toUpperCase(col[pos]);
     }
 
     @Override
