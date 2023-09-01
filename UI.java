@@ -17,5 +17,6 @@ public class UI {
                 System.out.println(e.getMessage());
             }
         }
+        scanner.close();
     }
 }
