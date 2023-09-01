@@ -64,18 +64,18 @@ public class Connect4 {
     /*
     * In the case of a win, capitalize the winning tokens.
      */
-    public void changeDisplay(String type, int pos){
+    public void changeDisplay(String type, int col){
         switch(type){
             case "horizontal":
-                int row = columns.get(pos).getHighest();
-                for(int i = pos-3; i <= pos; i++){
+                int row = columns.get(col).getHighest();
+                for(int i = col-3; i <= col; i++){
                     columns.get(i).capitalizeToken(row);
                 }
                 break;
             case "vertical":
-                int end = columns.get(pos).getHighest();
-                for(int i = end; i > end-3; i--){
-                    columns.get(pos).capitalizeToken(i);
+                int end = columns.get(col).getHighest();
+                for(int i = end; i <= end+3; i++){
+                    columns.get(col).capitalizeToken(i);
                 }
         }
     }
