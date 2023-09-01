@@ -80,9 +80,13 @@ public class Connect4 {
         }
     }
 
+    public void changeDisplay(String type, int col, int row){
+
+    }
+
     public boolean checkIfWin(int pos){
         pos--;
-        return(checkIfHorizontal(pos) || checkifVertical(pos));
+        return(checkIfHorizontal(pos) || checkIfVertical(pos) || checkIfDiagonal(pos));
     }
 
     /* 
@@ -117,7 +121,7 @@ public class Connect4 {
         return false;
     }
 
-    public boolean checkifVertical(int col){
+    public boolean checkIfVertical(int col){
         int start = columns.get(col).getHighest();
         int end = start+3;
         if(end > 5){
@@ -136,6 +140,51 @@ public class Connect4 {
             else{
                 return false;
             }
+        }
+        return false;
+    }
+
+    public boolean checkIfDiagonal(int col){
+        return(checkIfUpDiagonal(col) || checkIfDownDiagonal(col));
+    }
+
+    public boolean checkIfUpDiagonal(int col){
+        return false;
+    }
+
+    public boolean checkIfDownDiagonal(int col){
+        int row = columns.get(col).getHighest();
+        int start = col-3;
+        int end = col+3;
+        int rowStart = row-3;
+        // ensuring checked tokens don't go out of bounds
+        if(start < 0){
+            rowStart += start*-1;
+            start = 0;
+        }
+        if(end > 6){
+            end = 6;
+        }
+        if(row-3 < 0){
+            start += (row-3)*-1;
+            rowStart += (row-3)*-1;
+        }
+        if(row+3 > 5){
+            end -= (row+3) - 5;
+        }
+        int count = 0;
+        for(int i = start; i <= end; i++){
+            if(columns.get(i).getToken(rowStart) == player){
+                count++;
+                if(count == 4){
+                    changeDisplay("downDiagonal", i, rowStart);
+                    return true;
+                }
+            }
+            else{
+                count = 0;
+            }
+            rowStart++;
         }
         return false;
     }
